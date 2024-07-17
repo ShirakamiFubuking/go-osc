@@ -1081,6 +1081,7 @@ func getRegEx(pattern string) *regexp.Regexp {
 		{",", "|"},  // Change a ',' to '|'
 		{"}", ")"},  // Change a '}' to ')'
 		{"?", "."},  // Change a '?' to '.'
+		{`\u`, `\\u`}, // Change `\u` to `\\u` to match unicode chars
 	} {
 		pattern = strings.Replace(pattern, trs.old, trs.new, -1)
 	}
