@@ -212,8 +212,8 @@ func (msg *Message) ClearData() {
 // Match returns true, if the OSC address pattern of the OSC Message matches the given
 // address. The match is case sensitive!
 func (msg *Message) Match(addr string) bool {
-	exp := getRegEx(msg.Address)
-	return exp.MatchString(addr)
+	exp := getRegEx(addr)
+	return exp.MatchString(msg.Address)
 }
 
 // TypeTags returns the type tag string.
@@ -1073,14 +1073,14 @@ func getRegEx(pattern string) *regexp.Regexp {
 	for _, trs := range []struct {
 		old, new string
 	}{
-		{".", `\.`}, // Escape all '.' in the pattern
-		{"(", `\(`}, // Escape all '(' in the pattern
-		{")", `\)`}, // Escape all ')' in the pattern
-		{"*", ".*"}, // Replace a '*' with '.*' that matches zero or more chars
-		{"{", "("},  // Change a '{' to '('
-		{",", "|"},  // Change a ',' to '|'
-		{"}", ")"},  // Change a '}' to ')'
-		{"?", "."},  // Change a '?' to '.'
+		{".", `\.`},   // Escape all '.' in the pattern
+		{"(", `\(`},   // Escape all '(' in the pattern
+		{")", `\)`},   // Escape all ')' in the pattern
+		{"*", ".*"},   // Replace a '*' with '.*' that matches zero or more chars
+		{"{", "("},    // Change a '{' to '('
+		{",", "|"},    // Change a ',' to '|'
+		{"}", ")"},    // Change a '}' to ')'
+		{"?", "."},    // Change a '?' to '.'
 		{`\u`, `\\u`}, // Change `\u` to `\\u` to match unicode chars
 	} {
 		pattern = strings.Replace(pattern, trs.old, trs.new, -1)
