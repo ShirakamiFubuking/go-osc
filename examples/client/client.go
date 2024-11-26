@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hypebeast/go-osc/osc"
+	"github.com/ShirakamiFubuking/go-osc/osc"
 )
 
 func testString() string {
